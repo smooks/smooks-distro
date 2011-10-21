@@ -1,6 +1,7 @@
 <project name="Get-Smooks" default="smooks.dependencies.get" basedir="." xmlns:artifact="urn:maven-artifact-ant">
 
-    <property name="smooks.version" value="1.4"/>
+    <property name="smooks.version" value="1.5"/>
+    <property name="maven.repo.url" value="https://nexus.codehaus.org/content/repositories/snapshots/"/>
 
     <description>
         Script for pulling Smooks v${smooks.version} jars from the maven repo.
@@ -27,12 +28,12 @@
     <target name="smooks.dependencies.get" depends="maven.get">
 
         <typedef resource="org/apache/maven/artifact/ant/antlib.xml" uri="urn:maven-artifact-ant" classpath="${maven.ant.repo.dir}/${maven.jar}"/>
-        <artifact:remoteRepository id="codehaus.m2.snapshots" url="http://snapshots.repository.codehaus.org" />
+        <artifact:remoteRepository id="codehaus" url="${maven.repo.url}" />
         <artifact:dependencies filesetId="dependencies">
 
             <dependency groupId="org.milyn" version="${smooks.version}" artifactId="milyn-smooks-all" />
 
-            <remoteRepository refid="codehaus.m2.snapshots" />
+            <remoteRepository refid="codehaus" />
         </artifact:dependencies>
 
         <tstamp>

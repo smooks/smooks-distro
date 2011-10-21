@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="assemble" name="Assembly">
 
-    <property name="version.base" value="1.4"/>
+    <property name="version.base" value="1.5"/>
     <property name="version" value="${version.base}"/>
-    <property name="mvn.version" value="1.4"/>
+    <property name="mvn.version" value="1.5"/>
 
     <property name="mainDistroName" value="smooks-${version}"/>
     <property name="mainTargetdir" value="target/${mainDistroName}"/>
 
     <property name="smooksSource" value="../smooks"/>
-    <property name="unedifactSource" value="../unedifact"/>
+    <property name="unedifactExamplesSource" value="../unedifact-examples"/>
 
     <property name="examplesDistroName" value="smooks-examples-${version}"/>
     <property name="exampleTargetdir" value="target/${examplesDistroName}"/>
@@ -30,12 +30,12 @@
         <condition property="smooksSourceExists">
             <available file="${smooksSource}" />
         </condition>
-        <condition property="unedifactSourceExists">
-            <available file="${unedifactSource}" />
+        <condition property="unedifactExamplesSourceExists">
+            <available file="${unedifactExamplesSource}" />
         </condition>
 
         <fail unless="smooksSourceExists" message="'smooks' source project must exist at same level in the file system as 'smooks-distro'.  Check it out from the Git repo." />
-        <fail unless="unedifactSourceExists" message="'unedifact' source project must exist at same level in the file system as 'smooks-distro'.  Check it out from the Git repo." />
+        <fail unless="unedifactExamplesSourceExists" message="'unedifact-examples' source project must exist at same level in the file system as 'smooks-distro'.  Check it out from the Git repo." />
     </target>
 
     <target if="iswindows" name="windows-assemble">
@@ -118,7 +118,7 @@
             <param name="target" value="${javadocdir}/commons"/>
         </antcall>
         <antcall target="move-javadoc">
-            <param name="source" value="${smooksSource}/edi/edisax/parser"/>
+            <param name="source" value="${smooksSource}/edi/edisax/"/>
             <param name="target" value="${javadocdir}/edi/edisax"/>
         </antcall>
         <antcall target="move-javadoc">
@@ -136,6 +136,10 @@
         <antcall target="move-javadoc">
             <param name="source" value="${smooksSource}/smooks-cartridges/camel"/>
             <param name="target" value="${javadocdir}/smooks-cartridges/camel"/>
+        </antcall>
+        <antcall target="move-javadoc">
+            <param name="source" value="${smooksSource}/smooks-cartridges/flatfile"/>
+            <param name="target" value="${javadocdir}/smooks-cartridges/flatfile"/>
         </antcall>
         <antcall target="move-javadoc">
             <param name="source" value="${smooksSource}/smooks-cartridges/csv"/>
@@ -207,7 +211,7 @@
         <!-- Copy the UN/Edifact examples... -->
         <mkdir dir="${exampleTargetdir}/unedifact"/>
         <copy todir="${exampleTargetdir}/unedifact">
-            <fileset dir="${unedifactSource}/examples"/>
+            <fileset dir="${unedifactExamplesSource}"/>
         </copy>
         
         <!-- Zip up the examples distro... -->
