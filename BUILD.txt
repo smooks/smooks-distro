@@ -1,3 +1,5 @@
+Need to set Ant to v1.6.5 and Maven to version v2.2.1
+
 To Build the distro:
 
 "mvn clean package"

@@ -1,6 +1,6 @@
 <project name="Get-Smooks" default="smooks.dependencies.get" basedir="." xmlns:artifact="urn:maven-artifact-ant">
 
-    <property name="smooks.version" value="1.5"/>
+    <property name="smooks.version" value="1.5.1"/>
     <property name="maven.repo.url" value="https://nexus.codehaus.org/content/repositories/snapshots/"/>
 
     <description>
@@ -31,7 +31,12 @@
         <artifact:remoteRepository id="codehaus" url="${maven.repo.url}" />
         <artifact:dependencies filesetId="dependencies">
 
-            <dependency groupId="org.milyn" version="${smooks.version}" artifactId="milyn-smooks-all" />
+            <dependency groupId="org.milyn" artifactId="milyn-smooks-all" version="${smooks.version}" />
+            <dependency groupId="ognl" artifactId="ognl" version="2.7.3" />
+            <dependency groupId="javax.transaction" artifactId="jta" version="1.1" />
+            <dependency groupId="jaxen" artifactId="jaxen" version="1.1.1" />
+            <dependency groupId="org.codehaus.jackson" artifactId="jackson-core-lgpl" version="1.0.1" />
+            <dependency groupId="org.freemarker" artifactId="freemarker" version="2.3.15" />
 
             <remoteRepository refid="codehaus" />
         </artifact:dependencies>
@@ -45,7 +50,7 @@
             <reference refid="dependencies" />
         </antcall>
         <delete>
-            <fileset dir="./${todir}" includes="xml-apis*.jar,junit*,log4j*,hsqldb*,servlet-api*,xalan*,jbossall-client*,jboss-j2ee*,jdom*,cglib-full*,cglib-nodep*,struts*,mockejb*,mockrunner*,commons-beanutils*,commons-digester*,commons-fileupload*,commons-validator*,oro*,xmlunit*,hibernate-core-*,ibatis-sqlmap-*,dom4j-*,ant-*,javassist-3.10.0.GA.jar" />
+            <fileset dir="./${todir}" includes="xml-apis*.jar,junit*,log4j*,hsqldb*,servlet-api*,xalan*,jbossall-client*,jboss-j2ee*,jdom*,cglib-full*,cglib-nodep*,struts*,mockejb*,mockrunner*,commons-beanutils*,commons-digester*,commons-fileupload*,commons-validator*,oro*,xmlunit*,hibernate-core-*,ibatis-sqlmap-*,dom4j-*,ant-*,javassist-*.jar,opencsv-*.jar" />
         </delete>
 
         <antcall target="remove.but.all" />

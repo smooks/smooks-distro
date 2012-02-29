@@ -2,16 +2,16 @@
 <project default="assemble" name="Assembly">
 
     <property name="version.base" value="1.5"/>
-    <property name="version" value="${version.base}-RC1"/>
-    <property name="mvn.version" value="1.5"/>
+    <property name="release.version" value="${version.base}.1"/>
+    <property name="mvn.version" value="1.5.1"/>
 
-    <property name="mainDistroName" value="smooks-${version}"/>
+    <property name="mainDistroName" value="smooks-${release.version}"/>
     <property name="mainTargetdir" value="target/${mainDistroName}"/>
 
     <property name="smooksSource" value="../smooks"/>
     <property name="unedifactExamplesSource" value="../unedifact-examples"/>
 
-    <property name="examplesDistroName" value="smooks-examples-${version}"/>
+    <property name="examplesDistroName" value="smooks-examples-${release.version}"/>
     <property name="exampleTargetdir" value="target/${examplesDistroName}"/>
 
     <target name="assemble">
@@ -234,7 +234,7 @@
         <!-- Download the distro docs... -->
         <java classname="org.milyn.distro.html.Downloader" fork="true" failonerror="true" maxmemory="128m">
             <arg value="http://www.smooks.org/mediawiki/index.php?title=V${version.base}:Smooks_v${version.base}_User_Guide&amp;printable=yes"/>
-            <arg value="${docsdir}/SmooksUserGuide_v${version}.html"/>
+            <arg value="${docsdir}/SmooksUserGuide_v${release.version}.html"/>
             <classpath>
                 <pathelement location="target/classes" />
                 <fileset dir="target/lib" />
